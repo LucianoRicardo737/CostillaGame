@@ -1,4 +1,4 @@
-import { state, STATE_RUNNING  } from '../states/actionState.js'
+import { state, STATE_PAUSE, STATE_RUNNING  } from '../states/actionState.js'
 import { startAudio } from './audio.js';
 import tick from './game.js';
 import randomXY from './randomXY.js';
@@ -8,6 +8,9 @@ const score = document.getElementById('scoreSnake')
 
 
 export default function startGame(){
+    if(state.runState===STATE_PAUSE){
+        return null
+    }
     if(state.runState === STATE_RUNNING){
         return null
     } else {

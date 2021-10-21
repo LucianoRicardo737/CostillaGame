@@ -2,9 +2,12 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+    font-family: monospace;
+    background-image: url('./images/Captura\ de\ pantalla\ de\ 2021-10-21\ 15-34-02.png');
+    
 }
 body{
-    background: #444;
+    background: rgb(0, 0, 0);
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -13,7 +16,6 @@ body{
 h3{
     margin-top: 0.5em;
     color: white;
-    font-family: monospace;
     font-size: 2em;
 
 }
@@ -26,7 +28,6 @@ h3{
     flex-direction: row;
     justify-content: space-between;
     color: white;
-    font-family: monospace;
     font-size: 1.5em;
     margin-top: 0.5em;
 
@@ -35,7 +36,6 @@ h3{
     border: none;
     background: none;
     color: white;
-    font-family: monospace;
     cursor: pointer;
 }
 .startButton:hover{
@@ -44,7 +44,7 @@ h3{
 canvas {
     width: 500px;
     height: 500px;
-    border: solid 8px rgb(91, 13, 125);
+    border: solid 8px rgb(72, 3, 102);
     border-radius: 5px;
     /* background: linear-gradient(
       0deg,
