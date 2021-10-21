@@ -17,7 +17,7 @@ export default function tick() {
     let tail = {};
     let interval = state.tick;
   
-  
+
   
     Object.assign(tail,
       state.snake[state.snake.length - 1]);
@@ -28,7 +28,7 @@ export default function tick() {
     );
   
     if (state.runState === STATE_RUNNING) {
-  
+        
       for (let idx = highestIndex; idx > -1; idx--) {
         const sq = state.snake[idx];
   
@@ -65,7 +65,7 @@ export default function tick() {
     if (didScore) {
       state.growing += GROW_SCALE;
       state.prey = randomXY();
-      score.innerHTML = highestIndex
+      score.innerHTML = state.snake.length
       state.tick = interval-0.3
     }
   
