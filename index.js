@@ -1,4 +1,4 @@
-import { state, DIRECTIONS_MAP  } from './states/actionState.js'
+import { state, DIRECTIONS_MAP, STATE_PAUSE  } from './states/actionState.js'
 import startGame from './actions/startGame.js'
 import pauseGameAndReturnGame from './actions/pauseGameAndReturnGame.js'
 import { audioActtions } from './actions/audio.js'
