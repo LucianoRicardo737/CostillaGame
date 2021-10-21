@@ -1,0 +1,63 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body{
+    background: #444;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h3{
+    margin-top: 0.5em;
+    color: white;
+    font-family: monospace;
+    font-size: 2em;
+
+}
+
+.sectionActions{
+    /* border: 1px solid white; */
+    margin-bottom: 10px;
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: white;
+    font-family: monospace;
+    font-size: 1.5em;
+    margin-top: 0.5em;
+
+}
+.startButton{
+    border: none;
+    background: none;
+    color: white;
+    font-family: monospace;
+    cursor: pointer;
+}
+.startButton:hover{
+    color: rgba(255, 255, 0, 0.845);
+}
+canvas {
+    width: 500px;
+    height: 500px;
+    border: solid 8px rgb(91, 13, 125);
+    border-radius: 5px;
+    /* background: linear-gradient(
+      0deg,
+      rgb(4, 44, 84) 0%,
+      rgb(31, 4, 43) 100%
+    ); */
+    background-image: url('./images/back.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+audio{
+    margin-top: 0.5em;
+    width: 500px;
+    display: none;
+}
