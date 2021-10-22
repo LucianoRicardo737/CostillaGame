@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='./index.css' />
     <title>Comete esta costilla</title>
-   
+    <script defer type="module" src="https://www.gstatic.com/firebasejs/8.6.2/firebase.js"> </script>
+
+    <script defer type="module" src="https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js"></script>
 </head>
+
 <body>
     <h3>Comete esta costilla</h3>
     <section class='sectionActions'>
@@ -21,18 +25,54 @@
 
     </section>
 
-   <div>
-        <canvas width="500" height="500"></canvas>
-   </div>
+    <div class="conteiner">
 
-    <audio id='audio' loop  controls>
+        <section class='leftSection' id='leftSection'>
+            Score del mundo mundial
+        </section>
+
+        <canvas width="500" height="500"></canvas>
+        <section class='rigthSection' id='rigthSection'>
+
+            <div class="container">
+            <h3>Sobre ti</h3>
+
+            <div class="aboutYou">
+            <span id='userEmail' class="userEmail"></span>
+            
+            <intentos>
+                Intentos:
+            </intentos>
+
+            <span>
+                Score:
+            </span>
+        </div>
+        </div>
+            <button class="logWithGoogle" id='logWithGoogle'>
+                Log Con Google
+            </button>
+            <button class="logWithGoogle hidden" id='logOut'>
+                Salir
+            </button>
+        </section>
+
+
+    </div>
+
+    <audio id='audio' loop controls>
         <source src="./audio/neverSurrender.ogg" type="audio/ogg">
         Tu navegador no es compatible con una mierda.
-    </audio> 
+    </audio>
+
+
+    <!-- <button id='testButton'>TEST</button> -->
 
     <script defer type="module" src='./index.js'>
     </script>
 
-   
+    <script type="module" src='./auth/firebase.js'> </script>
+
 </body>
+
 </html>
