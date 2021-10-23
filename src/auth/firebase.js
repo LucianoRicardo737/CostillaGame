@@ -26,6 +26,9 @@ const yourScore = document.getElementById('yourScore')
 
 
 logOutButton.addEventListener('click', () => {
+    if(state.runState !== STATE_LOSING){
+        return null
+    }
     firebase.auth().signOut().then(() => {
         yourAttemps.innerHTML = "Nivel gallina"
         yourScore.innerHTML = 0
@@ -129,10 +132,6 @@ export function editData(id, score, attempts) {
 
     db.collection("scoreBoard").doc(id).update(data);
 }
-
-
-    
-
 
 
 
