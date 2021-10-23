@@ -51,9 +51,15 @@ h3{
 .leftSection{
     color: white;
     /* border: 1px solid white; */
-    width: 200px;
+    width: 300px;
     display: flex;
     flex-direction: column;
+}
+.score{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 }
 .rigthSection{
     color: white;

@@ -1,4 +1,5 @@
 import { state, STATE_PAUSE, STATE_RUNNING  } from '../states/actionState.js'
+import { data } from '../states/dataUser.js';
 import { startAudio } from './audio.js';
 import tick from './game.js';
 import randomXY from './randomXY.js';

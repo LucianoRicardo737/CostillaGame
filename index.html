@@ -28,27 +28,39 @@
     <div class="conteiner">
 
         <section class='leftSection' id='leftSection'>
-            Score del mundo mundial
+            <div class="container">
+                
+                <h4>Score del mundo mundial (top 20)</h4>
+
+
+                <div class="aboutYou" id='scoreBoard'>
+
+
+
+                    
+                </div>
+
+            </div>
         </section>
 
         <canvas width="500" height="500"></canvas>
         <section class='rigthSection' id='rigthSection'>
 
             <div class="container">
-            <h3>Sobre ti</h3>
+                <h3>Sobre ti</h3>
 
-            <div class="aboutYou">
-            <span id='userEmail' class="userEmail"></span>
-            
-            <intentos>
-                Intentos:
-            </intentos>
+                <div class="aboutYou">
+                    <span id='userEmail' class="userEmail"></span>
 
-            <span>
-                Score:
-            </span>
-        </div>
-        </div>
+                    <span class='score'>
+                        Intentos:<span id='yourAttemps' ></span>
+                    </span>
+
+                    <span class='score'>
+                        Top Score:<span id='yourScore' ></span>
+                    </span>
+                </div>
+            </div>
             <button class="logWithGoogle" id='logWithGoogle'>
                 Log Con Google
             </button>
@@ -66,7 +78,7 @@
     </audio>
 
 
-    <button id='testButton'>TEST</button>
+    <!-- <button id='testButton'>TEST</button> -->
 
     <script defer type="module" src='./index.js'> </script>
     <script type="module" src='./auth/firebase.js'> </script>
