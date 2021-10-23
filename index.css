@@ -32,6 +32,14 @@ h3{
     margin-top: 0.5em;
 
 }
+.closeAbout{
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+.closeAbout:hover{
+    color: rgba(255, 255, 0, 0.845);
+}
 .startButton{
     border: none;
     background: none;
@@ -61,10 +69,13 @@ h3{
     justify-content: space-between;
     width: 100%;
 }
+.attempsGlobalScore{
+    font-size: 9px;
+}
 .rigthSection{
     color: white;
     /* border: 1px solid white; */
-    width: 200px;
+    width: 300px;
     display: flex;
     flex-direction: column;
     word-wrap: break-word;  
@@ -79,6 +90,10 @@ h3{
 }
 .logWithGoogle{
     color: white;
+    cursor: pointer;
+}
+.logWithGoogle:hover{
+    color: rgba(255, 255, 0, 0.845);
 }
 canvas {
     width: 500px;
@@ -103,4 +118,19 @@ audio{
 
 .hidden{
     display: none;
+}
+
+.aboutbutton{
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+.aboutbutton:hover{
+    color: rgba(255, 255, 0, 0.845);
+}
+.options{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px 0px;
 }

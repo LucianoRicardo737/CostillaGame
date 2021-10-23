@@ -3,6 +3,8 @@ import { data } from '../states/dataUser.js';
 import { startAudio } from './audio.js';
 import tick from './game.js';
 import randomXY from './randomXY.js';
+import { editData, actualiceUserData } from '../auth/firebase.js';
+
 
 const score = document.getElementById('scoreSnake')
 
@@ -21,5 +23,8 @@ export default function startGame(){
         score.innerHTML = state.snake.length - 1
         tick()
         startAudio()
+        let attempts = data.attempts + 1
+        editData(data.userId, data.topScore, attempts)
+        actualiceUserData(data.userId)
     }
 }

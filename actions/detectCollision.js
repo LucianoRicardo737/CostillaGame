@@ -2,6 +2,8 @@ import { state, BOARD_WIDTH, BOARD_HEIGHT } from '../states/actionState.js'
 
 export default function detectCollision() {
     let head = state.snake[0];
+    
+   
 
     if (head.x < 0
       || head.x >= BOARD_WIDTH
@@ -19,6 +21,5 @@ export default function detectCollision() {
         return true;
       }
     }
-  
     return false;
   }

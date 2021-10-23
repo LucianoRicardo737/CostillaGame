@@ -8,14 +8,39 @@ import tick from './actions/game.js'
 
 
 
-
-
+const aboutText = document.getElementById('aboutText')
+const aboutButton = document.getElementById('aboutbutton')
 
 document.getElementById('startButton').addEventListener('click', ()=>{
     startGame()
 })
 document.getElementById('pauseButton').addEventListener('click', ()=>{
     pauseGameAndReturnGame()
+})
+
+aboutButton.addEventListener('click', ()=>{
+  if(aboutButton.innerHTML === 'About'){
+    aboutButton.innerHTML = 'Cerrar'
+    aboutText.innerHTML = `
+    <p>
+    Te movés con "WASD". pausas con la "P" e inicias o reinicias con la "R".
+    </p>
+    <br>
+    <br>
+    <p>
+    Si sos una gallina, podes jugar sin registrarte y tus intentos no contaran, pero si eres un peronista de verdad y quieres que tu puntuación cuente, ingresa con tu cuenta de google y queda entre los 20 mejores para que todos vean que tu eres el mejor.
+    </p>
+    <br>
+    <p>Comete esta costilla esta desarrollado por Luciano Emanuel Ricardo, y esta basado en el tutorial de <a href='https://gamikun.github.io/aylaculebra/snake.html'>Gamaliel Espinoza Macedo.
+    <a></p>
+    `
+  } else {
+    aboutButton.innerHTML = 'About'
+    aboutText.innerHTML = ``
+  }
+
+
+ 
 })
 
 window.onload = function() {

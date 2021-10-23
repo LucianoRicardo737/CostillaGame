@@ -1,4 +1,6 @@
+import { editData } from '../auth/firebase.js';
 import { state, STATE_RUNNING, STATE_LOSING, GROW_SCALE  } from '../states/actionState.js'
+import { data } from '../states/dataUser.js';
 import { stopAudio } from './audio.js';
 
 import detectCollision from './detectCollision.js';
@@ -60,6 +62,12 @@ export default function tick() {
       state.growing = 0;
       stopAudio()
       audio.currentTime = 0
+      let scoreTosave =  parseInt(score.innerHTML)
+      if(data.topScore < scoreTosave) {
+        console.log("object")
+        editData(data.userId, scoreTosave, data.attempts)
+      } 
+      
     }
   
     if (didScore) {

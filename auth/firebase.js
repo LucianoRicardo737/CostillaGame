@@ -72,11 +72,25 @@ let yourAttemps = document.getElementById('yourAttemps')
 let yourScore = document.getElementById('yourScore')
 
 
-async function getUserData(user) {
+export async function getUserData(user) {
     db.collection("scoreBoard").where("email", "==", user).onSnapshot((res) => {
         res.forEach((doc) => {
             yourAttemps.innerHTML = doc.data().attempts
             yourScore.innerHTML = doc.data().topScore
+            data.userId = doc.id
+            data.attempts = doc.data().attempts
+            data.topScore = doc.data().topScore
+        });
+
+    });
+}
+
+export async function actualiceUserData(user) {
+    db.collection("scoreBoard").where("email", "==", user).onSnapshot((res) => {
+        res.forEach((doc) => {
+            data.userId = doc.id
+            data.attempts = doc.data().attempts
+            data.topScore = doc.data().topScore
         });
 
     });
@@ -89,7 +103,10 @@ async function getScore() {
             return (
                 scoreBoard.innerHTML += `
                 <div class='score'>
-                    <span>${doc.data().email}</span><span>${doc.data().topScore}-(${doc.data().attempts})</span>
+                    <span>${doc.data().email}</span>
+                    <span class='containerScore'>
+                    <span>${doc.data().topScore}-</span><span class='attempsGlobalScore'>(${doc.data().attempts})</span>
+                    </span>
                 </div>`
             )
         });
@@ -99,10 +116,37 @@ getScore()
 
 
 
+// async function updateData(){
+
+//     const dataForUpdate = {
+       
+//     }
+
+//     console.log(yourScore.innerHTML)
+//     // await db.collection("scoreBoard").doc(data.userId).update(datosDelFormulario);
+// }
+
+// setTimeout(()=>{
+//     updateData()
+// },2000)
 
 
+const scoreSnake = document.getElementById('scoreSnake')
+
+export function editData(id, score, attempts) {
+    console.log(id)
+    
+    let data = {
+        topScore: score,
+        attempts: attempts
+    }
 
 
+    db.collection("scoreBoard").doc(id).update(data);
+}
+
+
+    
 
 
 
@@ -115,7 +159,6 @@ firebase.auth().onAuthStateChanged(function (user) {
         userEmail.innerHTML = user.email
         createUserOnScoreDatabase(data.email)
         getUserData(data.email)
-        data.userId = user.uid
     } else {
         logOutButton.classList.add('hidden')
         loginWithGoogle.classList.remove('hidden')
