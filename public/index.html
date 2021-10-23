@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='./index.css' />
+    <title>Comete esta costilla</title>
+    <script defer type="module" src="https://www.gstatic.com/firebasejs/8.6.2/firebase.js"> </script>
+
+    <script defer type="module" src="https://www.gstatic.com/firebasejs/9.1.0/firebase-firestore.js"></script>
+</head>
+
+<body>
+    <h3>Comete esta costilla</h3>
+    <section class='sectionActions'>
+        <span>Costillas:<span id='scoreSnake'>0</span></span>
+        <div>
+            <!-- <button class='startButton' id='playOrPauseMusic'>Musica<span id='musicStatus'>:Off</span></button> -->
+            <button class='startButton' id='startButton'>Iniciar</button>
+            <button class='startButton' id='pauseButton'>Pausar</button>
+            <!-- <button class='startButton' id='resetButton'>Restart</button> -->
+        </div>
+
+    </section>
+
+    <div class="conteiner">
+
+        <section class='leftSection' id='leftSection'>
+            <div class="container">
+                
+                <h4>Score del mundo mundial (top 20)</h4>
+
+
+                <div class="aboutYou" id='scoreBoard'>
+
+
+
+                    
+                </div>
+
+            </div>
+        </section>
+
+        <canvas width="500" height="500"></canvas>
+        <section class='rigthSection' id='rigthSection'>
+
+            <div class="container">
+                <h3>Sobre ti</h3>
+
+                <div class="aboutYou">
+                    <span id='userEmail' class="userEmail"></span>
+
+                    <span class='score'>
+                        Intentos:<span id='yourAttemps' >Nivel gallina</span>
+                    </span>
+
+                    <span class='score'>
+                        Top Score:<span id='yourScore' >0</span>
+                    </span>
+                </div>
+            </div>
+
+          <div class="options">
+            <span id='aboutText'></span>
+            <button id='aboutbutton' class="logWithGoogle aboutbutton">About</button>
+            <button class="logWithGoogle" id='logWithGoogle'>
+                Log Con Google
+            </button>
+            <button class="logWithGoogle hidden" id='logOut'>
+                Salir
+            </button>
+          </div>
+        </section>
+
+
+    </div>
+
+    <audio id='audio' loop controls>
+        <source src="./audio/neverSurrender.ogg" type="audio/ogg">
+        Tu navegador no es compatible con una mierda.
+    </audio>
+
+
+    <!-- <button id='testButton'>TEST</button> -->
+
+    <script defer type="module" src='./index.js'> </script>
+    <script type="module" src='./auth/firebase.js'> </script>
+
+</body>
+
+</html>
