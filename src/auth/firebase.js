@@ -148,6 +148,10 @@ firebase.auth().onAuthStateChanged(function (user) {
         logOutButton.classList.add('hidden')
         loginWithGoogle.classList.remove('hidden')
         userEmail.innerHTML = 'Usuario Anónimo'
+        userEmail.innerHTML = 'Usuario Anónimo'
+        yourAttemps.innerHTML = "Nivel gallina"
+        yourScore.innerHTML = 0
+        data.userId = ""
     }
 
 })
