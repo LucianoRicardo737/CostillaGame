@@ -19,7 +19,6 @@ export default function tick() {
     let tail = {};
     let interval = state.tick;
   
-
   
     Object.assign(tail,
       state.snake[state.snake.length - 1]);

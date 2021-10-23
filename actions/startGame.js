@@ -8,7 +8,7 @@ import { editData, actualiceUserData } from '../auth/firebase.js';
 
 const score = document.getElementById('scoreSnake')
 
-
+console.log(state.tick)
 
 export default function startGame(){
     if(state.runState === STATE_LOSING){
@@ -16,6 +16,7 @@ export default function startGame(){
         state.snake.push(randomXY());
         state.prey = randomXY();
         score.innerHTML = state.snake.length - 1
+        state.tick = 80
         tick()
         startAudio()
         let attempts = data.attempts + 1
