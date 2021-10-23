@@ -1,16 +1,9 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
+import firebaseConfig from "../env.js";
 import { data } from '../states/dataUser.js'
 
-const firebaseConfig = {
-    apiKey: "AIzaSyBAwipFgfHW68X3BXEBMwAyrVQJjPNE7SE",
-    authDomain: "test-7503a.firebaseapp.com",
-    databaseURL: "https://test-7503a-default-rtdb.firebaseio.com",
-    projectId: "test-7503a",
-    storageBucket: "test-7503a.appspot.com",
-    messagingSenderId: "160578647559",
-    appId: "1:160578647559:web:5fca4c4438a148cc321ca2"
-};
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
