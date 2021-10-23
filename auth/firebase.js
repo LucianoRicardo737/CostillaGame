@@ -26,8 +26,8 @@ const yourScore = document.getElementById('yourScore')
 
 logOutButton.addEventListener('click', () => {
     firebase.auth().signOut().then(() => {
-        yourAttemps.innerHTML = doc.data().attempts
-        yourScore.innerHTML = doc.data().topScore
+        yourAttemps.innerHTML = "Nivel gallina"
+        yourScore.innerHTML = 0
     }).catch((error) => {
         console.log(error)
     });
