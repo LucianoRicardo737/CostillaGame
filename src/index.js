@@ -5,9 +5,6 @@ import { audioActtions } from './actions/audio.js'
 import tick from './actions/game.js'
 
 
-
-
-
 const aboutText = document.getElementById('aboutText')
 const aboutButton = document.getElementById('aboutbutton')
 

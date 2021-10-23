@@ -3,7 +3,7 @@
     padding: 0px;
     box-sizing: border-box;
     font-family: monospace;
-    background-image: url('./images/Captura\ de\ pantalla\ de\ 2021-10-21\ 15-34-02.png');
+    background-image: url('./src/images/Captura\ de\ pantalla\ de\ 2021-10-21\ 15-34-02.png');
     
 }
 body{
@@ -104,7 +104,7 @@ canvas {
       rgb(4, 44, 84) 0%,
       rgb(31, 4, 43) 100%
     ); */
-    background-image: url('./images/back.jpeg');
+    background-image: url('./src/images/back.jpeg');
     background-size: cover;
     background-repeat: no-repeat;
   }

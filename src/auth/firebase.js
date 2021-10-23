@@ -1,6 +1,6 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
-import firebaseConfig from "../env.js";
+import firebaseConfig from "../../env.js";
 import { state, STATE_LOSING } from "../states/actionState.js";
 import { data } from '../states/dataUser.js'
 
