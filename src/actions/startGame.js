@@ -20,7 +20,7 @@ export default function startGame(){
         startAudio()
         let attempts = data.attempts + 1
         data.userId && editData(data.userId, data.topScore, attempts)
-        data.userId && actualiceUserData(data.userId)
+        data.userId && actualiceUserData(data.email)
     } else {
         return null
     }

@@ -1,11 +1,11 @@
 
-// import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.3/firebase-app.js";
 
 
 import { initializeApp } from "firebase/app";
 
-import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore/lite';
-import { GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, } from "firebase/auth";
+import { getFirestore, doc, updateDoc, onSnapshot, query, orderBy, limit, CollectionReference, collection, getDocs, where, setDoc } from "firebase/firestore";
+
 
 const provider = new GoogleAuthProvider();
 
@@ -16,18 +16,7 @@ import { data } from '../states/dataUser.js'
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// firebase.initializeApp(firebaseConfig);
-
-
-const provider = new firebase.auth.GoogleAuthProvider();
-
 const db = getFirestore(app);
-
-
-
-// export const db = firebase.firestore();
-
 
 
 
@@ -38,57 +27,69 @@ const yourAttemps = document.getElementById('yourAttemps')
 const yourScore = document.getElementById('yourScore')
 
 
+const auth = getAuth();
 
-logOutButton.addEventListener('click', () => {
-    if (state.runState !== STATE_LOSING) {
-        return null
-    }
-    // firebase.auth().signOut().then(() => {
-    //     yourAttemps.innerHTML = "Nivel gallina"
-    //     yourScore.innerHTML = 0
-    // }).catch((error) => {
-    //     console.log(error)
-    // });
-})
+async function login() {
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            const user = result.user;
+            createUserOnScoreDatabase(user.email)
+        }).catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            const email = error.email;
+            const credential = GoogleAuthProvider.credentialFromError(error);
+        });
+}
 
+async function logOut() {
+    signOut(auth).then(() => {
+        console.log('Chau')
+    }).catch((error) => {
+        console.log(error)
+    });
+}
 
 loginWithGoogle.addEventListener('click', () => {
     if (state.runState !== STATE_LOSING) {
         return null
     }
-    // firebase.auth()
-    //     .signInWithPopup(provider)
-    //     .then((result) => {
-    //         // console.log(error)
-    //     }).catch((error) => {
-    //         console.log(error)
-    //     });
 
-
-    const auth = getAuth();
-signInWithPopup(auth, provider)
-  .then((result) => {
-  }).catch((error) => {
-   console.log(error)
-  });
+    login()
 })
+
+logOutButton.addEventListener('click', () => {
+    if (state.runState !== STATE_LOSING) {
+        return null
+    }
+    logOut()
+})
+
+
 
 
 
 
 async function createUserOnScoreDatabase(userEmail) {
 
-    // let result = await db.collection("scoreBoard").where("email", "==", userEmail).get()
-    // const datas = result.docs.map((doc) => ({
-    //     id: doc.id,
-    //     ...doc.data(),
-    // }));
+    const q = query(collection(db, "scoreBoard"), where("email", "==", userEmail));
+    const user = await getDocs(q);
+
+    const datas = user.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+    }));
+
     if (datas.length === 0) {
-        // db.collection("scoreBoard").doc().set({
-        //     email: userEmail,
-        //     topScore: 0,
-        //     attempts: 0
-        // });
+        const newUser = doc(collection(db, "scoreBoard"));
+
+        await setDoc(newUser, {
+            email: userEmail,
+            topScore: 0,
+            attempts: 0
+        })
     }
     return null
 }
@@ -107,9 +108,9 @@ export async function getUserData(user) {
     //     });
 
     // });
-    const q = query(collection(db, "scoreBoard"), where("email", "==", "lucianoricardo737@gmail.com"));
-    const querySnapshot = await getDocs(q);
-    querySnapshot.forEach((doc) => {
+    const q = query(collection(db, "scoreBoard"), where("email", "==", user));
+    const userData = await getDocs(q);
+    userData.forEach((doc) => {
         yourAttemps.innerHTML = doc.data().attempts
         yourScore.innerHTML = doc.data().topScore
         data.userId = doc.id
@@ -118,75 +119,85 @@ export async function getUserData(user) {
     });
 
 
- 
-    
+
+
 }
 
 
 
 export async function actualiceUserData(user) {
-    // db.collection("scoreBoard").where("email", "==", user).onSnapshot((res) => {
-    //     res.forEach((doc) => {
-    //         data.userId = doc.id
-    //         data.attempts = doc.data().attempts
-    //         data.topScore = doc.data().topScore
-    //     });
 
-    // });
+    const q = query(collection(db, "scoreBoard"), where("email", "==", user));
+    onSnapshot(q, (doc) => {
+        doc.forEach((doc) => {
+            data.userId = doc.id
+            data.attempts = doc.data().attempts
+            data.topScore = doc.data().topScore
+        })
+    });
 }
 
 async function getScore() {
-    db.collection("scoreBoard").orderBy("topScore", "desc").limit(20).onSnapshot((res) => {
+
+    const q = query(collection(db, "scoreBoard"), orderBy("topScore", "desc"), limit(20));
+
+    await onSnapshot(q, (doc) => {
         scoreBoard.innerHTML = ''
-        res.forEach((doc) => {
+        doc.forEach((doc) => {
             return (
                 scoreBoard.innerHTML += `
-                <div class='score'>
-                    <span>${doc.data().email}</span>
-                    <span class='containerScore'>
-                    <span>${doc.data().topScore}-</span><span class='attempsGlobalScore'>(${doc.data().attempts})</span>
-                    </span>
-                </div>`
+                        <div class='score'>
+                            <span>${doc.data().email}</span>
+                            <span class='containerScore'>
+                            <span>${doc.data().topScore}-</span><span class='attempsGlobalScore'>(${doc.data().attempts})</span>
+                            </span>
+                        </div>`
             )
-        });
+        })
     });
+
+
 }
-// getScore()
+getScore()
 
 
 
 
 const scoreSnake = document.getElementById('scoreSnake')
 
-export function editData(id, score, attempts) {
+export async function editData(id, score, attempts) {
 
-    // let data = {
-    //     topScore: score,
-    //     attempts: attempts
-    // }
+    let data = {
+        topScore: score,
+        attempts: attempts
+    }
 
+    const newScoreData = doc(db, "scoreBoard", id);
+    await updateDoc(newScoreData, data);
 
-    // db.collection("scoreBoard").doc(id).update(data);
 }
 
 
 
-// firebase.auth().onAuthStateChanged(function (user) {
-//     if (user) {
-//         data.email = user.email
-//         logOutButton.classList.remove('hidden')
-//         loginWithGoogle.classList.add('hidden')
-//         userEmail.innerHTML = user.email
-//         createUserOnScoreDatabase(data.email)
-//         getUserData(data.email)
-//     } else {
-//         logOutButton.classList.add('hidden')
-//         loginWithGoogle.classList.remove('hidden')
-//         userEmail.innerHTML = 'Usuario Anónimo'
-//         userEmail.innerHTML = 'Usuario Anónimo'
-//         yourAttemps.innerHTML = "Nivel gallina"
-//         yourScore.innerHTML = 0
-//         data.userId = ""
-//     }
 
-// })
+
+
+
+auth.onAuthStateChanged(function (user) {
+    if (user) {
+        data.email = user.email
+        logOutButton.classList.remove('hidden')
+        loginWithGoogle.classList.add('hidden')
+        userEmail.innerHTML = user.email
+        getUserData(data.email)
+    } else {
+        logOutButton.classList.add('hidden')
+        loginWithGoogle.classList.remove('hidden')
+        userEmail.innerHTML = 'Usuario Anónimo'
+        userEmail.innerHTML = 'Usuario Anónimo'
+        yourAttemps.innerHTML = "Nivel gallina"
+        yourScore.innerHTML = 0
+        data.userId = ""
+    }
+})
+
