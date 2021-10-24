@@ -8,7 +8,6 @@ import { editData, actualiceUserData } from '../auth/firebase.js';
 
 const score = document.getElementById('scoreSnake')
 
-console.log(state.tick)
 
 export default function startGame(){
     if(state.runState === STATE_LOSING){
