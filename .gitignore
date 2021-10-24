@@ -69,4 +69,6 @@ public
 firebase.json
 .firebaserc
 
+dist
+
 
