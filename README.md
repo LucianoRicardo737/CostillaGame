@@ -5,5 +5,5 @@ Personal version for snake game. But eat ribs.
 [PLAY GAME](https://test-7503a.firebaseapp.com/)
 
 ## Preview
-![](/src/images/portada.png)
+![](/src/images/portada2.png)
 
