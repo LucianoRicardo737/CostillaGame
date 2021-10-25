@@ -80,7 +80,7 @@ window.onload = function () {
 
     setTimeout(() => {
       blockKey = false
-    },30)
+    },35)
 
   }
   

@@ -132,11 +132,14 @@ async function getScore() {
 
      onSnapshot(q, (doc) => {
         scoreBoard.innerHTML = ''
+        let index = 0
         doc.forEach((doc) => {
+            index++
+            let email = doc.data().email
             return (
                 scoreBoard.innerHTML += `
                         <div class='score'>
-                            <span>${doc.data().email}</span>
+                           <span>${index}  ${email.slice(0, email.indexOf('@'))}</span>
                             <span class='containerScore'>
                             <span>${doc.data().topScore}-</span><span class='attempsGlobalScore'>(${doc.data().attempts})</span>
                             </span>
