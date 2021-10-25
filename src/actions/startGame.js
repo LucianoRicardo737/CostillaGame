@@ -19,6 +19,7 @@ function startSnake() {
 export default function startGame(){
     if(state.runState === STATE_LOSING){
         state.runState = STATE_RUNNING;
+        state.direction = {x: 1, y: 0}
         state.snake.push(startSnake());
         state.prey = randomXY();
         score.innerHTML = state.snake.length - 1
