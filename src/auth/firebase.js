@@ -98,16 +98,6 @@ async function createUserOnScoreDatabase(userEmail) {
 
 
 export async function getUserData(user) {
-    // db.collection("scoreBoard").where("email", "==", user).onSnapshot((res) => {
-    //     res.forEach((doc) => {
-    //         yourAttemps.innerHTML = doc.data().attempts
-    //         yourScore.innerHTML = doc.data().topScore
-    //         data.userId = doc.id
-    //         data.attempts = doc.data().attempts
-    //         data.topScore = doc.data().topScore
-    //     });
-
-    // });
     const q = query(collection(db, "scoreBoard"), where("email", "==", user));
     const userData = await getDocs(q);
     userData.forEach((doc) => {
@@ -117,10 +107,6 @@ export async function getUserData(user) {
         data.attempts = doc.data().attempts
         data.topScore = doc.data().topScore
     });
-
-
-
-
 }
 
 
@@ -133,6 +119,8 @@ export async function actualiceUserData(user) {
             data.userId = doc.id
             data.attempts = doc.data().attempts
             data.topScore = doc.data().topScore
+            yourAttemps.innerHTML = doc.data().attempts
+            yourScore.innerHTML = doc.data().topScore
         })
     });
 }
@@ -141,7 +129,7 @@ async function getScore() {
 
     const q = query(collection(db, "scoreBoard"), orderBy("topScore", "desc"), limit(20));
 
-    await onSnapshot(q, (doc) => {
+     onSnapshot(q, (doc) => {
         scoreBoard.innerHTML = ''
         doc.forEach((doc) => {
             return (
