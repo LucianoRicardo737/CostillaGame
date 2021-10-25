@@ -82,4 +82,5 @@ export default function tick() {
     requestAnimationFrame(draw);
   
     setTimeout(tick, interval);
+
   }

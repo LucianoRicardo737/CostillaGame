@@ -36,6 +36,7 @@ async function login() {
             const token = credential.accessToken;
             const user = result.user;
             createUserOnScoreDatabase(user.email)
+            actualiceUserData(user.email)
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;

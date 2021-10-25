@@ -39,27 +39,17 @@ aboutButton.addEventListener('click', () => {
 
 })
 
-let keyPressed = []
 
-let keyPressedSpeedLimit = false
+let blockKey = false
 
 window.onload = function () {
   state.canvas = document.querySelector('canvas');
   state.context = state.canvas.getContext('2d');
 
+  
+
 
   window.onkeydown = function (e) {
-
-
-    if(keyPressedSpeedLimit){
-      return null
-    }
-    keyPressedSpeedLimit = true 
-    setTimeout(() => {
-      keyPressedSpeedLimit = false
-    }, 50)
-
-
 
     if (e.key === 'P' || e.key === 'p') {
       return pauseGameAndReturnGame()
@@ -71,46 +61,12 @@ window.onload = function () {
       return audioActtions()
     }
 
-
-    if(state.runState!== STATE_RUNNING){
+    if (state.runState !== STATE_RUNNING) {
       return null
     }
 
-
-
-    const lastKeyPressed = keyPressed[keyPressed.length - 1]
-    const actualKeyPressed = e.key
-
-    if (keyPressed.length > 5) {
-      keyPressed.shift(0, 3)
-    }
-
-    if (actualKeyPressed === "A" || actualKeyPressed === "a") {
-      if (lastKeyPressed === "D" || lastKeyPressed === "d") {
-        return null
-      }
-    }
-
-
-    if (lastKeyPressed === "D" || lastKeyPressed === "d") {
-      if (actualKeyPressed === "A" || actualKeyPressed === "a") {
-        return null
-      }
-    }
-
-    if (lastKeyPressed === "W" || lastKeyPressed === "w") {
-      if (actualKeyPressed === "S" || actualKeyPressed === "s") {
-        return null
-      }
-    }
-
-    if (lastKeyPressed === "S" || lastKeyPressed === "s") {
-      if (actualKeyPressed === "W" || actualKeyPressed === "w") {
-        return null
-      }
-    }
-
-    keyPressed.push(e.key)
+    if(blockKey) return null
+    blockKey = true
 
     const direction = DIRECTIONS_MAP[e.key];
     if (direction) {
@@ -121,6 +77,12 @@ window.onload = function () {
         state.direction.y = y;
       }
     }
+
+    setTimeout(() => {
+      blockKey = false
+    },30)
+
   }
-  tick();
+  
+  return tick();
 };
