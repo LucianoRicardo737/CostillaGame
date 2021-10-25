@@ -1,4 +1,4 @@
-import { state, DIRECTIONS_MAP } from './states/actionState.js'
+import { state, DIRECTIONS_MAP, STATE_RUNNING } from './states/actionState.js'
 import startGame from './actions/startGame.js'
 import pauseGameAndReturnGame from './actions/pauseGameAndReturnGame.js'
 import { audioActtions } from './actions/audio.js'
@@ -58,19 +58,29 @@ window.onload = function () {
     keyPressedSpeedLimit = true 
     setTimeout(() => {
       keyPressedSpeedLimit = false
-    }, 1)
+    }, 50)
 
 
 
-    const direction = DIRECTIONS_MAP[e.key];
+    if (e.key === 'P' || e.key === 'p') {
+      return pauseGameAndReturnGame()
+    }
+    if (e.key === 'R' || e.key === 'r') {
+      return startGame()
+    }
+    if (e.key === 'M' || e.key === 'm') {
+      return audioActtions()
+    }
+
+
+    if(state.runState!== STATE_RUNNING){
+      return null
+    }
+
+
 
     const lastKeyPressed = keyPressed[keyPressed.length - 1]
     const actualKeyPressed = e.key
-
-
-    if (lastKeyPressed === actualKeyPressed) {
-      return null
-    }
 
     if (keyPressed.length > 5) {
       keyPressed.shift(0, 3)
@@ -101,12 +111,9 @@ window.onload = function () {
       }
     }
 
-
-
-
     keyPressed.push(e.key)
-    // console.log(keyPressed.length)
 
+    const direction = DIRECTIONS_MAP[e.key];
     if (direction) {
       const [x, y] = direction;
       if (-x !== state.direction.x
@@ -115,18 +122,6 @@ window.onload = function () {
         state.direction.y = y;
       }
     }
-
-    if (e.key === 'P' || e.key === 'p') {
-      pauseGameAndReturnGame()
-    }
-    if (e.key === 'R' || e.key === 'r') {
-      startGame()
-    }
-    if (e.key === 'M' || e.key === 'm') {
-      audioActtions()
-    }
-    
-  
   }
   tick();
 };
