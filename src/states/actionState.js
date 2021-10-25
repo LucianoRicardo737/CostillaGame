@@ -6,8 +6,8 @@ export const STATE_PAUSE=3;
 
 const TICK = 80;
 export const SQUARE_SIZE = 10;
-export const BOARD_WIDTH = 50;
-export const BOARD_HEIGHT = 50;
+export const BOARD_WIDTH = 40;
+export const BOARD_HEIGHT = 40;
 export const GROW_SCALE = 1;
 export const DIRECTIONS_MAP = {
   'A': [-1,  0],

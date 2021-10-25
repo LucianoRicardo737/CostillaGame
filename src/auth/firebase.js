@@ -3,8 +3,8 @@
 
 import { initializeApp } from "firebase/app";
 
-import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, } from "firebase/auth";
-import { getFirestore, doc, updateDoc, onSnapshot, query, orderBy, limit, CollectionReference, collection, getDocs, where, setDoc } from "firebase/firestore";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut,  } from "firebase/auth";
+import { getFirestore, doc, updateDoc, onSnapshot, query, orderBy, limit,  collection, getDocs, where, setDoc } from "firebase/firestore";
 
 
 const provider = new GoogleAuthProvider();

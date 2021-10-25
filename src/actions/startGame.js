@@ -8,11 +8,18 @@ import { editData, actualiceUserData } from '../auth/firebase.js';
 
 const score = document.getElementById('scoreSnake')
 
+function startSnake() {
+    return {
+      x: parseInt(12),
+      y: parseInt(10)
+    };
+  }
+
 
 export default function startGame(){
     if(state.runState === STATE_LOSING){
         state.runState = STATE_RUNNING;
-        state.snake.push(randomXY());
+        state.snake.push(startSnake());
         state.prey = randomXY();
         score.innerHTML = state.snake.length - 1
         state.tick = 80
