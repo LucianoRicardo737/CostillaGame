@@ -19,7 +19,11 @@ h3{
     font-size: 2em;
 
 }
+.aboutYouTitle{
+    color: white;
+    font-size: 1.2em;
 
+}
 .sectionActions{
     /* border: 1px solid white; */
     width: 400px;
@@ -85,6 +89,16 @@ h3{
     flex-direction: column;
     align-items: flex-start;
     gap: 10px 0px;
+    
+}
+.scoreBoard{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px 0px;
+    max-height: 375px;
+    overflow-y: auto;
 }
 .logWithGoogle{
     color: white;
