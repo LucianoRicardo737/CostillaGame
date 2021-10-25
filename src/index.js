@@ -8,15 +8,15 @@ import tick from './actions/game.js'
 const aboutText = document.getElementById('aboutText')
 const aboutButton = document.getElementById('aboutbutton')
 
-document.getElementById('startButton').addEventListener('click', ()=>{
-    startGame()
+document.getElementById('startButton').addEventListener('click', () => {
+  startGame()
 })
-document.getElementById('pauseButton').addEventListener('click', ()=>{
-    pauseGameAndReturnGame()
+document.getElementById('pauseButton').addEventListener('click', () => {
+  pauseGameAndReturnGame()
 })
 
-aboutButton.addEventListener('click', ()=>{
-  if(aboutButton.innerHTML === 'About'){
+aboutButton.addEventListener('click', () => {
+  if (aboutButton.innerHTML === 'About') {
     aboutButton.innerHTML = 'Cerrar'
     aboutText.innerHTML = `
     <p>
@@ -37,35 +37,96 @@ aboutButton.addEventListener('click', ()=>{
   }
 
 
- 
+
 })
 
-window.onload = function() {
+let keyPressed = []
+
+let keyPressedSpeedLimit = false
+
+window.onload = function () {
   state.canvas = document.querySelector('canvas');
   state.context = state.canvas.getContext('2d');
 
-  window.onkeydown = function(e) {
+
+  window.onkeydown = function (e) {
+
+
+    if(keyPressedSpeedLimit){
+      return null
+    }
+    keyPressedSpeedLimit = true 
+    setTimeout(() => {
+      keyPressedSpeedLimit = false
+    }, 1)
+
+
+
     const direction = DIRECTIONS_MAP[e.key];
+
+    const lastKeyPressed = keyPressed[keyPressed.length - 1]
+    const actualKeyPressed = e.key
+
+
+    if (lastKeyPressed === actualKeyPressed) {
+      return null
+    }
+
+    if (keyPressed.length > 5) {
+      keyPressed.shift(0, 3)
+    }
+
+    if (actualKeyPressed === "A" || actualKeyPressed === "a") {
+      if (lastKeyPressed === "D" || lastKeyPressed === "d") {
+        return null
+      }
+    }
+
+
+    if (lastKeyPressed === "D" || lastKeyPressed === "d") {
+      if (actualKeyPressed === "A" || actualKeyPressed === "a") {
+        return null
+      }
+    }
+
+    if (lastKeyPressed === "W" || lastKeyPressed === "w") {
+      if (actualKeyPressed === "S" || actualKeyPressed === "s") {
+        return null
+      }
+    }
+
+    if (lastKeyPressed === "S" || lastKeyPressed === "s") {
+      if (actualKeyPressed === "W" || actualKeyPressed === "w") {
+        return null
+      }
+    }
+
+
+
+
+    keyPressed.push(e.key)
+    // console.log(keyPressed.length)
+
     if (direction) {
       const [x, y] = direction;
       if (-x !== state.direction.x
-        && -y !== state.direction.y)
-      {
+        && -y !== state.direction.y) {
         state.direction.x = x;
         state.direction.y = y;
       }
     }
-   
-    if(e.key=== 'P' || e.key=== 'p'){
-        pauseGameAndReturnGame()
+
+    if (e.key === 'P' || e.key === 'p') {
+      pauseGameAndReturnGame()
     }
-    if(e.key=== 'R' || e.key=== 'r'){
-        startGame()
+    if (e.key === 'R' || e.key === 'r') {
+      startGame()
     }
-    if(e.key=== 'M' || e.key=== 'm'){
-        audioActtions()
+    if (e.key === 'M' || e.key === 'm') {
+      audioActtions()
     }
-   
+    
+  
   }
   tick();
 };
